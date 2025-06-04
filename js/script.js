@@ -9,7 +9,7 @@ let fashionheight = tileSize * rows;
 let context;
 //ship 
 let shipWidth =  tileSize*2;
-let shipHeight = tileSize;
+let shipHeight = tileSize + 10;
 let shipX = tileSize *collumn/2 - tileSize;
 let shipY = tileSize * rows - tileSize*2;
 
@@ -49,6 +49,7 @@ window.onload = function(){
     createAliens();
     lampiao = new Image();
     lampiao.src = "./lampiao.png";
+
     lampiao.onload = function(){
         context.drawImage(lampiao,ship.x,ship.y,ship.width,ship.height);
     }
@@ -60,8 +61,19 @@ window.onload = function(){
 function update(){
     requestAnimationFrame(update);
     if(gameOver){
-        return;
+        context.fillStyle = "rgba(0, 0, 0, 0.7)";
+    context.fillRect(0, 0, fashion.width, fashion.height);
+
+    context.fillStyle = "white";
+    context.font = "bold 36px courier";
+    context.textAlign = "center";
+    context.fillText("GAME OVER", fashion.width / 2, fashion.height / 2 - 20);
+
+    context.font = "20px courier";
+    context.fillText("Aperte F5 para reiniciar", fashion.width / 2, fashion.height / 2 + 20);
+   
     }
+    if(gameOver){return;}
     context.clearRect(0,0,fashion.width,fashion.height);
     context.drawImage(lampiao,ship.x,ship.y,ship.width,ship.height);
     //aliens
@@ -169,35 +181,3 @@ function detectar_colisão(a,e){
             a.y < e.y  + e.height &&
             a.y + a.height> e.y;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     context.strokeStyle = "#192919"
-//     for (let i = 32; i< fashion.width; i += 32) {
-//         context.beginPath()
-//         context.lineTo(i,0)
-//         context.lineTo(i,600)
-//         context.stroke() 
-        
-//         context.beginPath()
-//         context.lineTo(0,i)
-//         context.lineTo(600,i)
-//         context.stroke() 
-        
-        
-//     }
-// }
